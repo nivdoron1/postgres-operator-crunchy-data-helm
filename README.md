@@ -136,7 +136,7 @@ In a new terminal, retrieve the database password using the following command.
     
 
 ---
-
+# install the PGO client
 This document outlines the necessary steps to set up the Postgres Operator and perform a data transfer, including initial configuration and installation, data transfer steps, and how to retrieve the database password for data verification purposes.
 
 
@@ -267,7 +267,7 @@ pgo version
 If the command outputs the versions of both the client and API server, your installation is successful.
 
 ---
-
+# install the CA Certificate
 For Windows installation and using PGO-Client in a containerized environment, please refer to the detailed documentation.
 
 Happy Postgres Managing!
@@ -354,6 +354,8 @@ Now you have a Client CA certificate (`ca-cert.pem`) and a Client TLS certificat
 
 Remember that these certificates have a limited validity period (365 days as configured), so you'll need to renew them before they expire.
 
+
+# install the PGO Kubectl client 
 
 This README guide is aimed at helping you download and install version 0.3.0 of the `pgo` Client Plugin for kubectl. The plugin facilitates the creation and management of PostgreSQL clusters created using Crunchy Postgres for Kubernetes.
 
