@@ -1,16 +1,8 @@
 ---
 
 ## Preparation
-
-1. **Change Directory to postgres-operator**
-Navigate to the `postgres-operator` directory in your terminal.
     
-    ```bash
-    cd postgres-operator
-    
-    ```
-    
-2. **Set App Label**
+1. **Set App Label**
 Choose the app label corresponding to the cluster you are working on.
     
     ```bash
@@ -19,7 +11,7 @@ Choose the app label corresponding to the cluster you are working on.
     
     ```
     
-3. **Set Namespace**
+2. **Set Namespace**
 Specify the namespace of your cluster.
     
     ```bash
@@ -27,7 +19,7 @@ Specify the namespace of your cluster.
     
     ```
     
-4. **Set Azure Container Name**
+3. **Set Azure Container Name**
 Specify the name of your Azure container.
     
     ```bash
@@ -36,7 +28,7 @@ Specify the name of your Azure container.
     ```
 
 
-5. **Add your app-deployment image**
+4. **Add your app-deployment image**
 Specify the name of your app-deployment image.
 
     ```bash
@@ -44,7 +36,7 @@ Specify the name of your app-deployment image.
 
     ```
     
-6. **Configure Azure Account**
+5. **Configure Azure Account**
 Edit the `azure.conf` file to include your Azure account details.
     
     ```bash
