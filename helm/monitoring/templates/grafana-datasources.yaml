@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crunchy-grafana-datasources
+  labels:
+    vendor: crunchydata
+  {{- include "crunchy.labels" . | nindent 4 }}
+data:
+  crunchy_grafana_datasource.yml: {{ .Values.grafanaDatasources.crunchyGrafanaDatasourceYml
+    | toYaml | indent 1 }}

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crunchy-alertmanager-config
+  labels:
+    vendor: crunchydata
+  {{- include "crunchy.labels" . | nindent 4 }}
+data:
+  alertmanager.yml: {{ .Values.alertmanagerConfig.alertmanagerYml | toYaml | indent
+    1 }}

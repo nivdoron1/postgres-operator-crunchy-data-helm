@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crunchy-alertmanager-rules-config
+  labels:
+    vendor: crunchydata
+  {{- include "crunchy.labels" . | nindent 4 }}
+data:
+  crunchy-alert-rules-pg.yml: {{ .Values.alertmanagerRulesConfig.crunchyAlertRulesPgYml
+    | toYaml | indent 1 }}

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crunchy-grafana-dashboards
+  labels:
+  {{- include "crunchy.labels" . | nindent 4 }}
+data:
+  crunchy_grafana_dashboards.yml: {{ .Values.grafanaDashboards.crunchyGrafanaDashboardsYml
+    | toYaml | indent 1 }}
+  pgbackrest.json: {{ .Values.grafanaDashboards.pgbackrestJson | toYaml | indent
+    1 }}
+  pod_details.json: {{ .Values.grafanaDashboards.podDetailsJson | toYaml | indent
+    1 }}
+  postgres_overview.json: {{ .Values.grafanaDashboards.postgresOverviewJson | toYaml
+    | indent 1 }}
+  postgresql_details.json: {{ .Values.grafanaDashboards.postgresqlDetailsJson | toYaml
+    | indent 1 }}
+  postgresql_service_health.json: {{ .Values.grafanaDashboards.postgresqlServiceHealthJson
+    | toYaml | indent 1 }}
+  prometheus_alerts.json: {{ .Values.grafanaDashboards.prometheusAlertsJson | toYaml
+    | indent 1 }}
+  query_statistics.json: {{ .Values.grafanaDashboards.queryStatisticsJson | toYaml
+    | indent 1 }}

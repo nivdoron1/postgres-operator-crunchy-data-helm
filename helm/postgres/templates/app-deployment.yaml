@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.appDeployment.pvc.name }}
+  namespace: postgres-operator
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.appDeployment.pvc.storagesize }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: postgres-operator
+  labels:
+    app.kubernetes.io/name: app-deployment
+spec:
+  replicas: {{ .Values.appDeployment.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: app-deployment
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: app-deployment
+    spec:
+      containers:
+      - image: {{ .Values.appDeployment.image | quote }}
+        name: app-container
+        env:
+        - name: DB_VENDOR
+          value: {{ .Values.appDeployment.dbVendor | quote }}
+        - name: DB_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.appDeployment.dbaddr.valueFrom.secretKeyRef.name | quote }}
+              key: {{ .Values.appDeployment.dbaddr.valueFrom.secretKeyRef.key | quote }}
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.appDeployment.dbport.valueFrom.secretKeyRef.name | quote }}
+              key: {{ .Values.appDeployment.dbport.valueFrom.secretKeyRef.key | quote }}
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.appDeployment.dbdatabase.valueFrom.secretKeyRef.name | quote }}
+              key: {{ .Values.appDeployment.dbdatabase.valueFrom.secretKeyRef.key | quote }}
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.appDeployment.dbuser.valueFrom.secretKeyRef.name | quote }}
+              key: {{ .Values.appDeployment.dbuser.valueFrom.secretKeyRef.key | quote }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.appDeployment.dbpassword.valueFrom.secretKeyRef.name | quote }}
+              key: {{ .Values.appDeployment.dbpassword.valueFrom.secretKeyRef.key | quote }}
+        - name: INSAIT_DB_POSTGRES_DB
+          value: {{ .Values.appDeployment.insaitDbpostgresdb | quote }}
+        - name: INSAIT_DB_POSTGRES_USER
+          value: {{ .Values.appDeployment.insaitDbpostgresuser | quote }}
+        - name: INSAIT_DB_POSTGRES_PASSWORD
+          value: {{ .Values.appDeployment.insaitDbpostgrespassword | quote }}
+        - name: INSAIT_DB_NUM_CUSTOMERS
+          value: {{ .Values.appDeployment.insaitDbNumCustomers | quote }}
+        ports:
+        - containerPort: 5432
+          name: postgres
+        - name: http
+          containerPort: {{ .Values.appDeployment.httpPort }}
+        - name: https
+          containerPort: {{ .Values.appDeployment.httpsPort }}
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql
+        resources: {}  # Define resources here
+      nodeSelector: {}
+      tolerations: []
+      affinity: {}
+      securityContext:
+        runAsUser: 70
+        runAsGroup: 70
+        fsGroup: 70
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.appDeployment.pvc.name }}
+      restartPolicy: Always
+
