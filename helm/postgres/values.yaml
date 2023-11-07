@@ -382,10 +382,10 @@ appDeployment:
       secretKeyRef:
         name: pgo-azure-pguser-pgo-azure
         key: password
-  insaitDbpostgresdb: "postgres"
-  insaitDbpostgresuser: "postgres"
-  insaitDbpostgrespassword: "postgres"
-  insaitDbNumCustomers: "8000"
+  pgoDbpostgresdb: "postgres"
+  pgoDbpostgresuser: "postgres"
+  pgoDbpostgrespassword: "postgres"
+  pgoDbNumCustomers: "8000"
   httpPort: 80
   httpsPort: 443
   pvc:

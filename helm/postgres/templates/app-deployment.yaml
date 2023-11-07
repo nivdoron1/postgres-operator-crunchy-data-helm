@@ -60,13 +60,13 @@ spec:
               name: {{ .Values.appDeployment.dbpassword.valueFrom.secretKeyRef.name | quote }}
               key: {{ .Values.appDeployment.dbpassword.valueFrom.secretKeyRef.key | quote }}
         - name: INSAIT_DB_POSTGRES_DB
-          value: {{ .Values.appDeployment.insaitDbpostgresdb | quote }}
+          value: {{ .Values.appDeployment.pgoDbpostgresdb | quote }}
         - name: INSAIT_DB_POSTGRES_USER
-          value: {{ .Values.appDeployment.insaitDbpostgresuser | quote }}
+          value: {{ .Values.appDeployment.pgoDbpostgresuser | quote }}
         - name: INSAIT_DB_POSTGRES_PASSWORD
-          value: {{ .Values.appDeployment.insaitDbpostgrespassword | quote }}
+          value: {{ .Values.appDeployment.pgoDbpostgrespassword | quote }}
         - name: INSAIT_DB_NUM_CUSTOMERS
-          value: {{ .Values.appDeployment.insaitDbNumCustomers | quote }}
+          value: {{ .Values.appDeployment.pgoDbNumCustomers | quote }}
         ports:
         - containerPort: 5432
           name: postgres
