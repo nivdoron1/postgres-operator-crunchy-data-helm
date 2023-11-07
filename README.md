@@ -31,7 +31,7 @@ Specify the namespace of your cluster.
 Specify the name of your Azure container.
     
     ```bash
-    export AZURE_CONTAINER_NAME="infra-deployment-staging-backup"
+    export AZURE_CONTAINER_NAME=<your-azure-container-name>
     
     ```
 
